@@ -84,24 +84,24 @@ public static class ProgramFlow{
             if (optionSelected == 1){
                 Console.WriteLine("Let's add a new entry to the journal.");
                 Entry entry = new Entry("","","");
-                entry.newEntry();
+                entry.NewEntry();
 
                 //Check if the save happened by comparing to empty string
                 if (entry.entryPrompt != ""){
-                    curJournal.saveEntry(entry);
+                    curJournal.SaveEntry(entry);
                 }
             }
 
             // Display All Entries
             if (optionSelected == 2){
-                curJournal.displayJournal();
+                curJournal.DisplayJournal();
             }
 
             // Save Journal to a File
             if (optionSelected == 3){
                 Console.WriteLine("Enter the path to the journal file:");
                 string journalPath = Console.ReadLine();
-                List<Dictionary<string,string>> journalJSON = curJournal.journalToJSON();
+                List<Dictionary<string,string>> journalJSON = curJournal.JournalToJSON();
                 ProgramFlow.writeJSONToFile(journalJSON,journalPath);
             }
 
@@ -122,7 +122,7 @@ public static class ProgramFlow{
                 string response = Console.ReadLine();
                 while (promptVerify){
                     if (response == "y"){
-                        Prompt.addPrompt(newPrompt);
+                        Prompt.AddPrompt(newPrompt);
                         Console.WriteLine("Prompt successfully added");
                         promptVerify = false;
                     } else if (response == "n"){

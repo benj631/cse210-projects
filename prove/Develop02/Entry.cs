@@ -12,14 +12,14 @@ public class Entry{
         this.entryDate = entryDate;
     }
 
-    public string getDate(){
+    public string GetDate(){
         DateTime currentDateTime = DateTime.Now;
         string formattedDateTime = currentDateTime.ToString("yyyy, MM dd");
         return formattedDateTime;
     }
     
     // Turn an entry object into a dictionary. Use when turning journal to json
-    public Dictionary<string, string> entryToEntryDict(){
+    public Dictionary<string, string> EntryToEntryDict(){
         Dictionary<string, string> entryDict = new();
         entryDict.Add("prompt",entryPrompt);
         entryDict.Add("userEntry",userEntry);
@@ -29,8 +29,8 @@ public class Entry{
     }
     
 
-    public void newEntry(){
-        string currentPrompt = Prompt.getRandomPrompt();
+    public void NewEntry(){
+        string currentPrompt = Prompt.GetRandomPrompt();
         Console.WriteLine(currentPrompt);
         string userEntry = Console.ReadLine();
         userEntry = Regex.Replace(userEntry, "\"", "'");
@@ -60,7 +60,7 @@ public class Entry{
         {
             this.entryPrompt = currentPrompt;
             this.userEntry = userEntry;
-            this.entryDate = this.getDate();
+            this.entryDate = this.GetDate();
             Console.WriteLine("Entry saved.");
 
         }
@@ -74,21 +74,9 @@ public class Entry{
         
     }
     
-    public void displayEntry(){
+    public void DisplayEntry(){
         Console.WriteLine($"Prompt: {this.entryPrompt}");
         Console.WriteLine($"Entry: {this.userEntry}");
         Console.WriteLine($"Date: {this.entryDate}");
     }
-
-    public static Dictionary<string, string> parseJsonDict(Dictionary<string,string> jsonDict){
-        Dictionary<string, string> entryDict = new();
-        entryDict.Add("prompt",jsonDict["prompt"]);
-        entryDict.Add("userEntry",jsonDict["userEntry"]);
-        entryDict.Add("entryDate",jsonDict["entryDate"]);
-
-        return entryDict;
-    }
-
-    
-        
 }

@@ -13,14 +13,14 @@ public static class Prompt
         "What did you learn today?"
     };
 
-    public static string getRandomPrompt()
+    public static string GetRandomPrompt()
     {
         Random random = new Random();
         int randomIndex = random.Next(prompts.Count);
         return prompts[randomIndex];
     }
 
-    public static void addPrompt(string prompt)
+    public static void AddPrompt(string prompt)
     {
         prompts.Add(prompt);
     }

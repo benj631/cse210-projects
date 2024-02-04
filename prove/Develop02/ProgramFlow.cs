@@ -40,7 +40,7 @@ public static class ProgramFlow{
 
     }
 
-    public static int readJSONFileToJournal(string journalPath){
+    public static int ReadJSONFileToJournal(string journalPath){
         
         try {
             string JSONString = File.ReadAllText(journalPath);

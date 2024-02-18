@@ -35,7 +35,7 @@ class Fraction {
         return $"{this.numerator}/{this.denominator}";
     }
 
-    public float GetDecimalValue() {
-        return (float)this.numerator / this.denominator;
+    public double GetDecimalValue() {
+        return (double)this.numerator / this.denominator;
     }
 }

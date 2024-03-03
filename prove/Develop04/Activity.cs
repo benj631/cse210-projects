@@ -1,6 +1,6 @@
 using System;
 
-public abstract     class Activity{
+public abstract class Activity{
     public string activityName = "";
     public string activityDescription = "";
     int pauseDuration = 5; // Seconds
@@ -14,7 +14,8 @@ public abstract     class Activity{
     }
 
     public int GetActivityDuration(){
-        Console.WriteLine("Please enter the amount of time you would like to, or press enter  do the activity. For the default duration, press enter:");
+        Console.WriteLine("Please enter the amount of time you would like to do the activity for, \n");
+        Console.WriteLine("or press enter to do the activity for the default duration.");
         
         int duration = 0;
         try {
@@ -32,31 +33,52 @@ public abstract     class Activity{
     return duration;
     }
 
-    public void AnimatePause(){
-
-        int animationDurationSeconds = this.pauseDuration; // Change duration as needed
+    public void AnimatePause(string addition=""){
+        int animationDurationSeconds = this.pauseDuration;
         DateTime startTime = DateTime.Now;
 
-        while ((DateTime.Now - startTime).TotalSeconds < animationDurationSeconds){
-            int consoleWidth = Console.WindowWidth;
+        // Define the spinning sequence characters
+        char[] spinningChars = { '/', '|', '\\', '-' };
+        int currentIndex = 0;
 
-            for (int i = 0; i < consoleWidth - 1; i++){
-                Console.Write(" ");
+        while ((DateTime.Now - startTime).TotalSeconds < animationDurationSeconds)
+        {
+            // Output the current spinning character
+            Console.Write(spinningChars[currentIndex] + addition);
+
+            // Wait for a short duration to control the spinning speed
+            Thread.Sleep(500
+            );
+
+            foreach (char c in addition){
+                DeletePreviousChar();
             }
+            
+            DeletePreviousChar();
 
-            Console.Write("*");
-
-            TimeSpan remainingTime = TimeSpan.FromSeconds(animationDurationSeconds) - (DateTime.Now - startTime);
-            Console.WriteLine($"\nRemaining Time: {remainingTime:mm\\:ss}"); // Display remaining time
-            Thread.Sleep(100); // Adjust speed as needed
-            Console.CursorLeft = 0;
+            // Move to the next spinning character
+            currentIndex = (currentIndex + 1) % spinningChars.Length;
         }
 
+        // Clear the console after the animation is complete
         Console.Clear();
+    }
+
+// Method to delete the previously output character
+static void DeletePreviousChar(){
+        // Move the cursor back one position
+        Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+
+        // Replace the character with a space
+        Console.Write(" ");
+        
+        // Move the cursor back again
+        Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
     }
 
     public void PrepareActivity(){
         Console.Clear();
+        // Console.Clear();
         Console.WriteLine($"The {this.activityName.ToLower()} activity will begin shortly.");
         this.AnimatePause();
     }

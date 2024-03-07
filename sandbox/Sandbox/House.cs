@@ -231,11 +231,11 @@ class House{
 
             while (!validSelection){
                 makeAnotherAction = Console.ReadLine();
-                if (makeAnotherAction != "y" || makeAnotherAction != "n" ){
+                if (makeAnotherAction != "n" || makeAnotherAction == "y" ){
+                        validSelection = true; // Set validSelection to true only if the input is valid
+                    } else {
                         Console.WriteLine("Sorry, your selection was invalid.");
                         Console.WriteLine("Would you like to continue making actions? y/n");
-                    } else {
-                        validSelection = true; // Set validSelection to true only if the input is valid
                     }
                 }
             

@@ -208,5 +208,6 @@ class House{
 
     public void Init(){
         this.SetUpHouse();
+        this.HandleUserSelection();
     }
 }

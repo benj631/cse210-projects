@@ -147,27 +147,40 @@ class House{
         switch (selection){
             // "Turn on all lights",
             case 0:
-                Console.WriteLine("Turning on all lights");
+                Console.WriteLine("Turning on all lights...");
+                this.TurnOnAllLights();
+                Console.WriteLine("All lights turned on.");
+
             // "Turn off all lights",
                 break;
             case 1:
-                Console.WriteLine("Turning off all lights.");
+                Console.WriteLine("Turning off all lights...");
+                this.TurnOffAllLights();
+                Console.WriteLine("All lights turned off");
                 break;
             // "Turn on all devices",
             case 2:
-                Console.WriteLine("Turning on all devices.");
+                Console.WriteLine("Turning on all devices...");
+                this.TurnOnAllDevices();
+                Console.WriteLine("All devices turned on.");
                 break;
             // "Turn off all devices",
             case 3:
                 Console.WriteLine("Turning off all devices.");
+                this.TurnOffAllDevices();
+                Console.WriteLine("All devices turned off.");
                 break;
             // "Show all devices that are on",
             case 4:
-                Console.WriteLine("Showing all devices that are on.");
+                Console.WriteLine("Showing all devices that are on...");
+                this.DisplayAllDevicesOn();
+                Console.WriteLine("All devices displayed.");
                 break;
             // "Show all statuses",
             case 5:
-                Console.WriteLine("Showing all statuses.");
+                Console.WriteLine("Showing all statuses...");
+                this.DisplayStatuses();
+                Console.WriteLine("All statuses displayed.");
                 break;
             // "Show all statuses in a room",
             case 6:

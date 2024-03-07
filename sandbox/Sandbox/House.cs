@@ -127,95 +127,122 @@ class House{
             Console.WriteLine(option);
         }
         
-        int selection = 0;
-        bool validSelection = false;
+        bool continueMainLoop = true;
 
-        while (!validSelection){
-            try{
-                selection = int.Parse(Console.ReadLine()) - 1;
+        while(continueMainLoop){
 
-                if (selection < 0 || selection > 8){
-                    Console.WriteLine("Sorry, your selection was invalid.");
-                } else {
-                    validSelection = true; // Set validSelection to true only if the input is valid
-                }
-            } catch (FormatException) {
-                Environment.Exit(1); // Handle FormatException here if necessary
-            }
-        }
-        
-        switch (selection){
-            // "Turn on all lights",
-            case 0:
-                Console.WriteLine("Turning on all lights...");
-                this.TurnOnAllLights();
-                Console.WriteLine("All lights turned on.");
 
-            // "Turn off all lights",
-                break;
-            case 1:
-                Console.WriteLine("Turning off all lights...");
-                this.TurnOffAllLights();
-                Console.WriteLine("All lights turned off");
-                break;
-            // "Turn on all devices",
-            case 2:
-                Console.WriteLine("Turning on all devices...");
-                this.TurnOnAllDevices();
-                Console.WriteLine("All devices turned on.");
-                break;
-            // "Turn off all devices",
-            case 3:
-                Console.WriteLine("Turning off all devices.");
-                this.TurnOffAllDevices();
-                Console.WriteLine("All devices turned off.");
-                break;
-            // "Show all devices that are on",
-            case 4:
-                Console.WriteLine("Showing all devices that are on...");
-                this.DisplayAllDevicesOn();
-                Console.WriteLine("All devices displayed.");
-                break;
-            // "Show all statuses",
-            case 5:
-                Console.WriteLine("Showing all statuses...");
-                this.DisplayStatuses();
-                Console.WriteLine("All statuses displayed.");
-                break;
-            // "Show all statuses in a room",
-            case 6:
-                string roomName = Console.ReadLine();
-                foreach (Room room in rooms){
-                    if (roomName == room.roomName){
-                        room.DisplayStatuses();
+            int selection = 0;
+            bool validSelection = false;
+
+            while (!validSelection){
+                try{
+                    selection = int.Parse(Console.ReadLine()) - 1;
+
+                    if (selection < 0 || selection > 8){
+                        Console.WriteLine("Sorry, your selection was invalid.");
                     } else {
-                        Console.WriteLine("Sorry, no rooms match that name.");
+                        validSelection = true; // Set validSelection to true only if the input is valid
                     }
-                } 
-                break;
-            // "Show the device that has been on the longest",
-            case 7:
-                this.ReportLongestOnDuration();
-                break;
-            // "Interact with a device"
-            case 8:
-                Console.WriteLine("Enter a device to interact with:");
-                string deviceToInteractWith = Console.ReadLine();
+                } catch (FormatException) {
+                    Environment.Exit(1); // Handle FormatException here if necessary
+                }
+            }
+            
+            switch (selection){
+                // "Turn on all lights",
+                case 0:
+                    Console.WriteLine("Turning on all lights...");
+                    this.TurnOnAllLights();
+                    Console.WriteLine("All lights turned on.");
 
-                foreach (Room room in rooms){
-                    foreach (SmartDevice device in room.devices){
-                        if (device.deviceName == deviceToInteractWith){
-                            device.DisplayStatus();
-                            device.DisplayOptions();
+                // "Turn off all lights",
+                    break;
+                case 1:
+                    Console.WriteLine("Turning off all lights...");
+                    this.TurnOffAllLights();
+                    Console.WriteLine("All lights turned off");
+                    break;
+                // "Turn on all devices",
+                case 2:
+                    Console.WriteLine("Turning on all devices...");
+                    this.TurnOnAllDevices();
+                    Console.WriteLine("All devices turned on.");
+                    break;
+                // "Turn off all devices",
+                case 3:
+                    Console.WriteLine("Turning off all devices.");
+                    this.TurnOffAllDevices();
+                    Console.WriteLine("All devices turned off.");
+                    break;
+                // "Show all devices that are on",
+                case 4:
+                    Console.WriteLine("Showing all devices that are on...");
+                    this.DisplayAllDevicesOn();
+                    Console.WriteLine("All devices displayed.");
+                    break;
+                // "Show all statuses",
+                case 5:
+                    Console.WriteLine("Showing all statuses...");
+                    this.DisplayStatuses();
+                    Console.WriteLine("All statuses displayed.");
+                    break;
+                // "Show all statuses in a room",
+                case 6:
+                    string roomName = Console.ReadLine();
+                    foreach (Room room in rooms){
+                        if (roomName == room.roomName){
+                            room.DisplayStatuses();
+                        } else {
+                            Console.WriteLine("Sorry, no rooms match that name.");
+                        }
+                    } 
+                    break;
+                // "Show the device that has been on the longest",
+                case 7:
+                    this.ReportLongestOnDuration();
+                    break;
+                // "Interact with a device"
+                case 8:
+                    Console.WriteLine("Enter a device to interact with:");
+                    string deviceToInteractWith = Console.ReadLine();
+
+                    foreach (Room room in rooms){
+                        foreach (SmartDevice device in room.devices){
+                            if (device.deviceName == deviceToInteractWith){
+                                device.DisplayStatus();
+                                device.DisplayOptions();
+                            }
                         }
                     }
-                }
-                // put code here to validate stuff. !!!
-                break;
-
-            // else
-            default:
+                    // put code here to validate stuff. !!!
                     break;
+
+                // else
+                default:
+                        break;
+            }
+            
+            validSelection = false;
+
+            Console.WriteLine("Would you like to continue making actions? y/n");
+
+            string makeAnotherAction = "";
+
+            while (!validSelection){
+                makeAnotherAction = Console.ReadLine();
+                if (makeAnotherAction != "y" || makeAnotherAction != "n" ){
+                        Console.WriteLine("Sorry, your selection was invalid.");
+                        Console.WriteLine("Would you like to continue making actions? y/n");
+                    } else {
+                        validSelection = true; // Set validSelection to true only if the input is valid
+                    }
+                }
+            
+            if (makeAnotherAction == "n"){
+                continueMainLoop = false;
+                Console.WriteLine("Thank you for using your Smart Home.");
+            }
         }
     }
 

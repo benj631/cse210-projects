@@ -1,17 +1,24 @@
 using System;
 
-public class EternalGoal : Goal{
+public class DailyGoal : Goal{
 
-    public new string goalType = "Eternal";
+    public new string goalType = "Daily";
+    public bool doneToday = false;
+    public int daysDone = 0;
+    public int bonusPointsMilestoneIncrement;
+    public int bonusPoints;
 
-    private int bonusPoints = 0;
-    private int bonusPointsMilestoneIncrement = 0;
-
-    public EternalGoal(string goalName, int goalPoints,int bonusPoints, int bonusPointsMilestoneIncrement) : base(goalName, goalPoints){
+    public DailyGoal(string goalName, int goalPoints,int bonusPoints, int bonusPointsMilestoneIncrement) : base(goalName, goalPoints){
         this.goalPoints = goalPoints;
-        this.bonusPoints = bonusPoints;
         this.goalToReach = this.goalPoints;
+        this.bonusPoints = bonusPoints;
         this.bonusPointsMilestoneIncrement = bonusPointsMilestoneIncrement;
+
+    }
+
+    public void SetDoneToday(){
+        doneToday = true;
+        daysDone += 1;
     }
 
     public override void ShowProgress(){
@@ -25,9 +32,13 @@ public class EternalGoal : Goal{
     }
 
     public override int GetCurScore(){
-        return (this.goalProgress * this.goalPoints + (this.bonusPoints * (int)Math.Floor((double)this.goalProgress / this.bonusPointsMilestoneIncrement)));
+        if (goalAchieved == true){
+            return this.goalPoints + this.bonusPoints;
+        } else {
+            return 0;
+        }
     }
-    
+
     public override void AdvanceGoalProgress(){
         this.goalProgress = this.goalPoints;
     }
@@ -42,8 +53,11 @@ public class EternalGoal : Goal{
             { "bonusPointsMilestoneIncrement", this.bonusPointsMilestoneIncrement},
             { "goalProgress", this.goalProgress },
             { "goalToReach", this.goalToReach },
-            { "goalAchieved", this.goalAchieved }
+            { "goalAchieved", this.goalAchieved },
+            { "doneToday", this.doneToday },
+            { "daysDone", this.daysDone }
         };
+
         return goalDict;
     }
 }
